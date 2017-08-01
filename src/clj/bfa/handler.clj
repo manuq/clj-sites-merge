@@ -1,4 +1,4 @@
-(ns im.bfa-handler
+(ns bfa.handler
   (:require [compojure.core :refer [GET routes defroutes]]
             [compojure.route :refer [resources]]
             [ring.middleware.reload :refer [wrap-reload]]

@@ -29,12 +29,7 @@
   :cljsbuild {:builds {
 
               :bfa-dev {
-                ;;:resource-paths ["resources/bfa"]
                 :source-paths ["src/cljs"]
-
-                ;; the presence of a :figwheel configuration here
-                ;; will cause figwheel to inject the figwheel client
-                ;; into your build
                 :figwheel {:on-jsload "bfa.core/on-js-reload"
                            :open-urls ["http://localhost:3449/"]}
 
@@ -43,15 +38,9 @@
                            :output-to "resources/bfa/public/js/compiled/bfa.js"
                            :output-dir "resources/bfa/public/js/compiled/out"
                            :source-map-timestamp true
-                           ;; To console.log CLJS data-structures make sure you enable devtools in Chrome
-                           ;; https://github.com/binaryage/cljs-devtools
                            :preloads [devtools.preload]}}
 
-               ;; This next build is an compressed minified build for
-               ;; production. You can build this with:
-               ;; lein cljsbuild once min
               :bfa-min {
-                ;; :resource-paths ["resources/bfa"]
                 :source-paths ["src/cljs"]
                 :compiler {:main bfa.core
                            :output-to "resources/bfa/public/js/compiled/bfa.min.js"
@@ -61,12 +50,7 @@
 
 
               :im-dev {
-                ;; :resource-paths ["resources/misc"]
                 :source-paths ["src/cljs"]
-
-                ;; the presence of a :figwheel configuration here
-                ;; will cause figwheel to inject the figwheel client
-                ;; into your build
                 :figwheel {:on-jsload "im.core/on-js-reload"
                            :open-urls ["http://localhost:3449/"]}
 
@@ -75,15 +59,9 @@
                            :output-to "resources/im/public/js/compiled/im.js"
                            :output-dir "resources/im/public/js/compiled/out"
                            :source-map-timestamp true
-                           ;; To console.log CLJS data-structures make sure you enable devtools in Chrome
-                           ;; https://github.com/binaryage/cljs-devtools
                            :preloads [devtools.preload]}}
 
-               ;; This next build is an compressed minified build for
-               ;; production. You can build this with:
-               ;; lein cljsbuild once min
               :im-min {
-                ;; :resource-paths ["resources/misc"]
                 :source-paths ["src/cljs"]
                 :compiler {:main im.core
                            :output-to "resources/im/public/js/compiled/im.min.js"
@@ -93,28 +71,7 @@
 
 }}
 
-  :figwheel {;; :http-server-root "public" ;; default and assumes "resources"
-             ;; :server-port 3449 ;; default
-             ;; :server-ip "127.0.0.1"
-
-
-             ;; Start an nREPL server into the running figwheel process
-             ;; :nrepl-port 7888
-
-             ;; Server Ring Handler (optional)
-             ;; if you want to embed a ring handler into the figwheel http-kit
-             ;; server, this is for simple ring servers, if this
-
-             ;; doesn't work for you just run your own server :) (see lein-ring)
-
-             ;;:load-all-builds false 
-
-             ;; if you want to disable the REPL
-             ;; :repl false
-
-             ;; to pipe all the output to the repl
-             ;; :server-logfile false
-             }
+  :figwheel {}
 
 
   ;; setting up nREPL for Figwheel and ClojureScript dev
@@ -129,7 +86,7 @@
                                                         :target-path]}
              :fig-bfa {:figwheel {:http-server-root "bfa/public"
                                   :css-dirs ["resources/bfa/public/css"]
-                                  :ring-handler im.bfa-handler/app
+                                  :ring-handler bfa.handler/app
                                   :server-logfile "figwheel-logfile-bfa.log"}
                        :clean-targets ^{:protect false} ["resources/bfa/public/js/compiled"
                                                          :target-path]}
@@ -156,6 +113,3 @@
 
 
              })
-
-
-             ;; })
