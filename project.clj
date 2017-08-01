@@ -127,26 +127,15 @@
   ;; Please see:
   ;; https://github.com/bhauman/lein-figwheel/wiki/Using-the-Figwheel-REPL-within-NRepl
   :profiles {
-             :bfa-dev {:dependencies [[binaryage/devtools "0.9.2"]
-                                      [figwheel-sidecar "0.5.10"]
-                                      [com.cemerick/piggieback "0.2.1"]]
-                       ;; need to add dev source path here to get user.clj loaded
-                       :source-paths ["src/cljs" "dev"]
-                       ;; for CIDER
-                       ;; :plugins [[cider/cider-nrepl "0.12.0"]]
-                       :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
-                       ;; need to add the compliled assets to the :clean-targets
-                       :clean-targets ^{:protect false} ["resources/public/bfa/js/compiled"
-                                                         :target-path]}
-
-             :im-dev {:dependencies [[binaryage/devtools "0.9.2"]
-                                     [figwheel-sidecar "0.5.10"]
-                                     [com.cemerick/piggieback "0.2.1"]]
-                      ;; need to add dev source path here to get user.clj loaded
-                      :source-paths ["src/cljs" "dev"]
-                      ;; for CIDER
-                      ;; :plugins [[cider/cider-nrepl "0.12.0"]]
-                      :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
-                      ;; need to add the compliled assets to the :clean-targets
-                      :clean-targets ^{:protect false} ["resources/public/im/js/compiled"
-                                                        :target-path]}})
+             :dev {:dependencies [[binaryage/devtools "0.9.2"]
+                                  [figwheel-sidecar "0.5.10"]
+                                  [com.cemerick/piggieback "0.2.1"]]
+                   ;; need to add dev source path here to get user.clj loaded
+                   :source-paths ["src/cljs" "dev"]
+                   ;; for CIDER
+                   ;; :plugins [[cider/cider-nrepl "0.12.0"]]
+                   :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
+                   ;; need to add the compliled assets to the :clean-targets
+                   :clean-targets ^{:protect false} ["resources/public/bfa/js/compiled"
+                                                     "resources/public/im/js/compiled"
+                                                     :target-path]}})
