@@ -1,4 +1,4 @@
-(defproject pruebajoin "0.1.0-SNAPSHOT"
+(defproject sites-merge "0.1.0-SNAPSHOT"
   :description "FIXME: write this!"
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
@@ -21,10 +21,10 @@
             [lein-cljsbuild "1.1.5" :exclusions [[org.clojure/clojure]]]]
 
   :source-paths ["src/clj"]
-  ;; fixme needed?
-  :resource-paths ["resources"]
 
   :main im.server
+  :aliases {"fig-im" ["with-profile" "+fig-im" "figwheel" "im-dev"]
+            "fig-bfa" ["with-profile" "+fig-bfa" "figwheel" "bfa-dev"]}
 
   :cljsbuild {:builds {
 

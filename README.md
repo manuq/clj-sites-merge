@@ -1,39 +1,25 @@
-# pruebajoin
+# two sites one repo
 
-FIXME: Write a one-line description of your library/project.
+    # Build the js
+    lein cljsbuild once
 
-## Overview
+    # Build the CSS
+    lein garden once
 
-FIXME: Write a paragraph about the library/project and highlight its goals.
+    # Run site A on port 3000
+    lein run
 
-## Setup
+    # Run site B on port 3001
+    lein run 3001
 
-To get an interactive development environment run:
+    # Run site A with figwheel
+    lein with-profile +fig-im figwheel im-dev
 
-    lein figwheel
+    # Or use the alias
+    lein fig-im
 
-and open your browser at [localhost:3449](http://localhost:3449/).
-This will auto compile and send all changes to the browser without the
-need to reload. After the compilation process is complete, you will
-get a Browser Connected REPL. An easy way to try it is:
+    # Run site B with figwheel
+    lein with-profile +fig-bfa figwheel bfa-dev
 
-    (js/alert "Am I connected?")
-
-and you should see an alert in the browser window.
-
-To clean all compiled files:
-
-    lein clean
-
-To create a production build run:
-
-    lein do clean, cljsbuild once min
-
-And open your browser in `resources/public/index.html`. You will not
-get live reloading, nor a REPL. 
-
-## License
-
-Copyright © 2014 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at your option) any later version.
+    # Or use the alias
+    lein fig-bfa
