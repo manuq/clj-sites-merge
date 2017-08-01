@@ -15,12 +15,12 @@
    [:body
     [:div#app
      [:h2#change-me "Changing..."]]
-    (include-js "/im/js/compiled/im.js")
+    (include-js "/js/compiled/im.js")
     ]))
 
 (defroutes app-routes
   (GET "/" [] main-page)
-  (resources "/"))
+  (resources "/" {:root "im/public"}))
 
 (def app
   (routes

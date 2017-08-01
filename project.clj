@@ -20,6 +20,7 @@
             [lein-cljsbuild "1.1.5" :exclusions [[org.clojure/clojure]]]]
 
   :source-paths ["src/clj"]
+  ;; fixme needed?
   :resource-paths ["resources"]
 
   :main im.server
@@ -37,9 +38,9 @@
                            :open-urls ["http://localhost:3449/"]}
 
                 :compiler {:main bfa.core
-                           :asset-path "bfa/js/compiled/out"
-                           :output-to "resources/public/bfa/js/compiled/bfa.js"
-                           :output-dir "resources/public/bfa/js/compiled/out"
+                           :asset-path "js/compiled/out"
+                           :output-to "resources/bfa/public/js/compiled/bfa.js"
+                           :output-dir "resources/bfa/public/js/compiled/out"
                            :source-map-timestamp true
                            ;; To console.log CLJS data-structures make sure you enable devtools in Chrome
                            ;; https://github.com/binaryage/cljs-devtools
@@ -52,8 +53,8 @@
                 ;; :resource-paths ["resources/bfa"]
                 :source-paths ["src/cljs"]
                 :compiler {:main bfa.core
-                           :output-to "resources/public/bfa/js/compiled/bfa.min.js"
-                           :output-dir "resources/public/bfa/js/compiled-min/out"
+                           :output-to "resources/bfa/public/js/compiled/bfa.min.js"
+                           :output-dir "resources/bfa/public/js/compiled-min/out"
                            :optimizations :advanced
                            :pretty-print false}}
 
@@ -69,9 +70,9 @@
                            :open-urls ["http://localhost:3449/"]}
 
                 :compiler {:main im.core
-                           :asset-path "im/js/compiled/out"
-                           :output-to "resources/public/im/js/compiled/im.js"
-                           :output-dir "resources/public/im/js/compiled/out"
+                           :asset-path "js/compiled/out"
+                           :output-to "resources/im/public/js/compiled/im.js"
+                           :output-dir "resources/im/public/js/compiled/out"
                            :source-map-timestamp true
                            ;; To console.log CLJS data-structures make sure you enable devtools in Chrome
                            ;; https://github.com/binaryage/cljs-devtools
@@ -84,8 +85,8 @@
                 ;; :resource-paths ["resources/misc"]
                 :source-paths ["src/cljs"]
                 :compiler {:main im.core
-                           :output-to "resources/public/im/js/compiled/im.min.js"
-                           :output-dir "resources/public/im/js/compiled-min/out"
+                           :output-to "resources/im/public/js/compiled/im.min.js"
+                           :output-dir "resources/im/public/js/compiled-min/out"
                            :optimizations :advanced
                            :pretty-print false}}
 
@@ -119,15 +120,17 @@
   ;; Please see:
   ;; https://github.com/bhauman/lein-figwheel/wiki/Using-the-Figwheel-REPL-within-NRepl
   :profiles {
-             :fig-im {:figwheel {:css-dirs ["resources/public/im/css"]
+             :fig-im {:figwheel {:http-server-root "im/public"
+                                 :css-dirs ["resources/im/public/css"]
                                  :ring-handler im.handler/app
                                  :server-logfile "figwheel-logfile-im.log"}
-                      :clean-targets ^{:protect false} ["resources/public/im/js/compiled"
+                      :clean-targets ^{:protect false} ["resources/im/public/js/compiled"
                                                         :target-path]}
-             :fig-bfa {:figwheel {:css-dirs ["resources/public/bfa/css"]
+             :fig-bfa {:figwheel {:http-server-root "bfa/public"
+                                  :css-dirs ["resources/bfa/public/css"]
                                   :ring-handler im.bfa-handler/app
                                   :server-logfile "figwheel-logfile-bfa.log"}
-                       :clean-targets ^{:protect false} ["resources/public/bfa/js/compiled"
+                       :clean-targets ^{:protect false} ["resources/bfa/public/js/compiled"
                                                          :target-path]}
              :dev {:dependencies [[binaryage/devtools "0.9.2"]
                                   [figwheel-sidecar "0.5.10"]

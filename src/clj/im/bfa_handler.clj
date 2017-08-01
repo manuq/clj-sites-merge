@@ -15,12 +15,12 @@
    [:body
     [:div#app
      [:h2#change-me "Changing..."]]
-    (include-js "/bfa/js/compiled/bfa.js")
+    (include-js "/js/compiled/bfa.js")
     ]))
 
 (defroutes app-routes
   (GET "/" [] main-page)
-  (resources "/"))
+  (resources "/" {:root "bfa/public"}))
 
 (def app
   (routes
