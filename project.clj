@@ -105,16 +105,6 @@
 
              ;; doesn't work for you just run your own server :) (see lein-ring)
 
-             ;; For BFA
-             ;; :css-dirs ["resources/public/bfa/css"]
-             ;; :ring-handler im.bfa-handler/app
-             ;; :server-logfile "figwheel-logfile-bfa.log"
-
-             ;; For MISC
-            :css-dirs ["resources/public/im/css"]
-            :ring-handler im.handler/app
-            :server-logfile "figwheel-logfile-im.log"
-
              ;;:load-all-builds false 
 
              ;; if you want to disable the REPL
@@ -129,6 +119,16 @@
   ;; Please see:
   ;; https://github.com/bhauman/lein-figwheel/wiki/Using-the-Figwheel-REPL-within-NRepl
   :profiles {
+             :fig-im {:figwheel {:css-dirs ["resources/public/im/css"]
+                                 :ring-handler im.handler/app
+                                 :server-logfile "figwheel-logfile-im.log"}
+                      :clean-targets ^{:protect false} ["resources/public/im/js/compiled"
+                                                        :target-path]}
+             :fig-bfa {:figwheel {:css-dirs ["resources/public/bfa/css"]
+                                  :ring-handler im.bfa-handler/app
+                                  :server-logfile "figwheel-logfile-bfa.log"}
+                       :clean-targets ^{:protect false} ["resources/public/bfa/js/compiled"
+                                                         :target-path]}
              :dev {:dependencies [[binaryage/devtools "0.9.2"]
                                   [figwheel-sidecar "0.5.10"]
                                   [com.cemerick/piggieback "0.2.1"]]
@@ -136,8 +136,4 @@
                    :source-paths ["src/cljs" "dev"]
                    ;; for CIDER
                    ;; :plugins [[cider/cider-nrepl "0.12.0"]]
-                   :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
-                   ;; need to add the compliled assets to the :clean-targets
-                   :clean-targets ^{:protect false} ["resources/public/bfa/js/compiled"
-                                                     "resources/public/im/js/compiled"
-                                                     :target-path]}})
+                   :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}}})
