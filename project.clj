@@ -28,7 +28,7 @@
 
               :bfa-dev {
                 ;;:resource-paths ["resources/bfa"]
-                :source-paths ["src/bfa"]
+                :source-paths ["src/cljs"]
 
                 ;; the presence of a :figwheel configuration here
                 ;; will cause figwheel to inject the figwheel client
@@ -50,7 +50,7 @@
               ;;  ;; lein cljsbuild once min
               ;; :bfa-min {
               ;;   ;; :resource-paths ["resources/bfa"]
-              ;;   :source-paths ["src/bfa"]
+              ;;   :source-paths ["src/cljs"]
               ;;   :compiler {:main bfa.core
               ;;              :output-to "resources/public/bfa/js/compiled/bfa.min.js"
               ;;              :optimizations :advanced
@@ -59,7 +59,7 @@
 
               :misc-dev {
                 ;; :resource-paths ["resources/misc"]
-                :source-paths ["src/misc"]
+                :source-paths ["src/cljs"]
 
                 ;; the presence of a :figwheel configuration here
                 ;; will cause figwheel to inject the figwheel client
@@ -81,7 +81,7 @@
               ;;  ;; lein cljsbuild once min
               ;; :misc-min {
               ;;   ;; :resource-paths ["resources/misc"]
-              ;;   :source-paths ["src/misc"]
+              ;;   :source-paths ["src/cljs"]
               ;;   :compiler {:main misc.core
               ;;              :output-to "resources/public/misc/js/compiled/misc.min.js"
               ;;              :optimizations :advanced
@@ -103,12 +103,15 @@
 
              ;; doesn't work for you just run your own server :) (see lein-ring)
 
-             :css-dirs ["resources/public/bfa/css"]
-             :ring-handler im.handler/bfa-app
-             :server-logfile "figwheel-logfile-bfa.log"
-;;             :css-dirs ["resources/public/misc/css"]
-;;             :ring-handler im.handler/misc-app
-;;             :server-logfile "figwheel-logfile-misc.log"
+             ;; For BFA
+             ;; :css-dirs ["resources/public/bfa/css"]
+             ;; :ring-handler im.handler/bfa-app
+             ;; :server-logfile "figwheel-logfile-bfa.log"
+
+             ;; For MISC
+            :css-dirs ["resources/public/misc/css"]
+            :ring-handler im.handler/misc-app
+            :server-logfile "figwheel-logfile-misc.log"
 
              ;;:load-all-builds false 
 
@@ -128,7 +131,7 @@
                                       [figwheel-sidecar "0.5.10"]
                                       [com.cemerick/piggieback "0.2.1"]]
                        ;; need to add dev source path here to get user.clj loaded
-                       :source-paths ["src/bfa" "dev"]
+                       :source-paths ["src/cljs" "dev"]
                        ;; for CIDER
                        ;; :plugins [[cider/cider-nrepl "0.12.0"]]
                        :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
@@ -140,7 +143,7 @@
                                        [figwheel-sidecar "0.5.10"]
                                        [com.cemerick/piggieback "0.2.1"]]
                         ;; need to add dev source path here to get user.clj loaded
-                        :source-paths ["src/misc" "dev"]
+                        :source-paths ["src/cljs" "dev"]
                         ;; for CIDER
                         ;; :plugins [[cider/cider-nrepl "0.12.0"]]
                         :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
