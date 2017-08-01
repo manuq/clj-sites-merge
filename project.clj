@@ -34,11 +34,7 @@
                 ;; will cause figwheel to inject the figwheel client
                 ;; into your build
                 :figwheel {:on-jsload "bfa.core/on-js-reload"
-                           ;; :open-urls will pop open your application
-                           ;; in the default browser once Figwheel has
-                           ;; started and complied your application.
-                           ;; Comment this out once it no longer serves you.
-                           :open-urls ["http://localhost:3449/index.html"]}
+                           :open-urls ["http://localhost:3449/"]}
 
                 :compiler {:main bfa.core
                            :asset-path "bfa/js/compiled/out"
@@ -69,11 +65,7 @@
                 ;; will cause figwheel to inject the figwheel client
                 ;; into your build
                 :figwheel {:on-jsload "misc.core/on-js-reload"
-                           ;; :open-urls will pop open your application
-                           ;; in the default browser once Figwheel has
-                           ;; started and complied your application.
-                           ;; Comment this out once it no longer serves you.
-                           :open-urls ["http://localhost:3449/index.html"]}
+                           :open-urls ["http://localhost:3449/"]}
 
                 :compiler {:main misc.core
                            :asset-path "misc/js/compiled/out"
@@ -101,7 +93,6 @@
              ;; :server-port 3449 ;; default
              ;; :server-ip "127.0.0.1"
 
-             :css-dirs ["resources/public/bfa/css" "resources/public/misc/css"] ;; watch and update CSS
 
              ;; Start an nREPL server into the running figwheel process
              ;; :nrepl-port 7888
@@ -112,8 +103,10 @@
 
              ;; doesn't work for you just run your own server :) (see lein-ring)
 
+             :css-dirs ["resources/public/bfa/css"]
              :ring-handler im.handler/bfa-app
              :server-logfile "figwheel-logfile-bfa.log"
+;;             :css-dirs ["resources/public/misc/css"]
 ;;             :ring-handler im.handler/misc-app
 ;;             :server-logfile "figwheel-logfile-misc.log"
 
