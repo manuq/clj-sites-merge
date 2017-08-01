@@ -12,11 +12,8 @@
     # Run site B on port 3001
     lein run 3001
 
-    # Run site A with figwheel
-    lein with-profile +fig-im figwheel im-dev
-
-    # Or use the alias
-    lein fig-im
+    # Run site A (default) with figwheel
+    lein figwheel
 
     # Run site B with figwheel
     lein with-profile +fig-bfa figwheel bfa-dev

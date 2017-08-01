@@ -17,8 +17,7 @@
                  [hiccup "1.0.5"]
                  [lein-garden "0.3.0"]]
 
-  :plugins [[lein-figwheel "0.5.10"]
-            [lein-cljsbuild "1.1.5" :exclusions [[org.clojure/clojure]]]]
+  :plugins [[lein-cljsbuild "1.1.5" :exclusions [[org.clojure/clojure]]]]
 
   :source-paths ["src/clj"]
 
@@ -27,27 +26,6 @@
             "fig-bfa" ["with-profile" "+fig-bfa" "figwheel" "bfa-dev"]}
 
   :cljsbuild {:builds {
-
-              :bfa-dev {
-                :source-paths ["src/cljs"]
-                :figwheel {:on-jsload "bfa.core/on-js-reload"
-                           :open-urls ["http://localhost:3449/"]}
-
-                :compiler {:main bfa.core
-                           :asset-path "js/compiled/out"
-                           :output-to "resources/bfa/public/js/compiled/bfa.js"
-                           :output-dir "resources/bfa/public/js/compiled/out"
-                           :source-map-timestamp true
-                           :preloads [devtools.preload]}}
-
-              :bfa-min {
-                :source-paths ["src/cljs"]
-                :compiler {:main bfa.core
-                           :output-to "resources/bfa/public/js/compiled/bfa.min.js"
-                           :output-dir "resources/bfa/public/js/compiled-min/out"
-                           :optimizations :advanced
-                           :pretty-print false}}
-
 
               :im-dev {
                 :source-paths ["src/cljs"]
@@ -69,15 +47,29 @@
                            :optimizations :advanced
                            :pretty-print false}}
 
+                       :bfa-dev {
+                                 :source-paths ["src/cljs"]
+                                 :figwheel {:on-jsload "bfa.core/on-js-reload"
+                                            :open-urls ["http://localhost:3449/"]}
+
+                                 :compiler {:main bfa.core
+                                            :asset-path "js/compiled/out"
+                                            :output-to "resources/bfa/public/js/compiled/bfa.js"
+                                            :output-dir "resources/bfa/public/js/compiled/out"
+                                            :source-map-timestamp true
+                                            :preloads [devtools.preload]}}
+
+                       :bfa-min {
+                                 :source-paths ["src/cljs"]
+                                 :compiler {:main bfa.core
+                                            :output-to "resources/bfa/public/js/compiled/bfa.min.js"
+                                            :output-dir "resources/bfa/public/js/compiled-min/out"
+                                            :optimizations :advanced
+                                            :pretty-print false}}
 }}
 
-  :figwheel {}
-
-
-  ;; setting up nREPL for Figwheel and ClojureScript dev
-  ;; Please see:
-  ;; https://github.com/bhauman/lein-figwheel/wiki/Using-the-Figwheel-REPL-within-NRepl
   :profiles {
+             :default [:base :system :user :provided :dev :fig-im]
              :fig-im {:figwheel {:http-server-root "im/public"
                                  :css-dirs ["resources/im/public/css"]
                                  :ring-handler im.handler/app
@@ -93,11 +85,11 @@
              :dev {:dependencies [[binaryage/devtools "0.9.2"]
                                   [figwheel-sidecar "0.5.10"]
                                   [com.cemerick/piggieback "0.2.1"]]
-                   ;; need to add dev source path here to get user.clj loaded
                    :source-paths ["src/cljs" "dev"]
                    ;; for CIDER
                    ;; :plugins [[cider/cider-nrepl "0.12.0"]]
-                   :plugins [[lein-garden "0.3.0"]]
+                   :plugins [[lein-figwheel "0.5.10"]
+                             [lein-garden "0.3.0"]]
                    :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
 
                    :garden {:builds [{:source-paths ["src/styles"]
