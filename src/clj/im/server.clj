@@ -1,6 +1,10 @@
 (ns im.server
   (:use [org.httpkit.server :only [run-server]])
-  (:require [im.handler :refer [bfa-app misc-app]]))
+  (:require [im.handler]
+            [im.bfa-handler]))
 
 (defn -main [& args]
-  (run-server bfa-app {:port 8080}))
+  (let [port (bigint (nth args 0 "3000"))]
+    (case port
+      3000 (run-server im.handler/app {:port port})
+      3001 (run-server im.bfa-handler/app {:port port}))))

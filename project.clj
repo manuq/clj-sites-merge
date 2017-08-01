@@ -57,20 +57,20 @@
               ;;              :pretty-print false}}
 
 
-              :misc-dev {
+              :im-dev {
                 ;; :resource-paths ["resources/misc"]
                 :source-paths ["src/cljs"]
 
                 ;; the presence of a :figwheel configuration here
                 ;; will cause figwheel to inject the figwheel client
                 ;; into your build
-                :figwheel {:on-jsload "misc.core/on-js-reload"
+                :figwheel {:on-jsload "im.core/on-js-reload"
                            :open-urls ["http://localhost:3449/"]}
 
-                :compiler {:main misc.core
-                           :asset-path "misc/js/compiled/out"
-                           :output-to "resources/public/misc/js/compiled/misc.js"
-                           :output-dir "resources/public/misc/js/compiled/out"
+                :compiler {:main im.core
+                           :asset-path "im/js/compiled/out"
+                           :output-to "resources/public/im/js/compiled/im.js"
+                           :output-dir "resources/public/im/js/compiled/out"
                            :source-map-timestamp true
                            ;; To console.log CLJS data-structures make sure you enable devtools in Chrome
                            ;; https://github.com/binaryage/cljs-devtools
@@ -79,11 +79,11 @@
               ;;  ;; This next build is an compressed minified build for
               ;;  ;; production. You can build this with:
               ;;  ;; lein cljsbuild once min
-              ;; :misc-min {
+              ;; :im-min {
               ;;   ;; :resource-paths ["resources/misc"]
               ;;   :source-paths ["src/cljs"]
-              ;;   :compiler {:main misc.core
-              ;;              :output-to "resources/public/misc/js/compiled/misc.min.js"
+              ;;   :compiler {:main im.core
+              ;;              :output-to "resources/public/im/js/compiled/im.min.js"
               ;;              :optimizations :advanced
               ;;              :pretty-print false}}
 
@@ -104,14 +104,14 @@
              ;; doesn't work for you just run your own server :) (see lein-ring)
 
              ;; For BFA
-             ;; :css-dirs ["resources/public/bfa/css"]
-             ;; :ring-handler im.handler/bfa-app
-             ;; :server-logfile "figwheel-logfile-bfa.log"
+             :css-dirs ["resources/public/bfa/css"]
+             :ring-handler im.bfa-handler/app
+             :server-logfile "figwheel-logfile-bfa.log"
 
              ;; For MISC
-            :css-dirs ["resources/public/misc/css"]
-            :ring-handler im.handler/misc-app
-            :server-logfile "figwheel-logfile-misc.log"
+            ;; :css-dirs ["resources/public/im/css"]
+            ;; :ring-handler im.handler/app
+            ;; :server-logfile "figwheel-logfile-im.log"
 
              ;;:load-all-builds false 
 
@@ -139,14 +139,14 @@
                        :clean-targets ^{:protect false} ["resources/public/bfa/js/compiled"
                                                          :target-path]}
 
-             :misc-dev {:dependencies [[binaryage/devtools "0.9.2"]
-                                       [figwheel-sidecar "0.5.10"]
-                                       [com.cemerick/piggieback "0.2.1"]]
-                        ;; need to add dev source path here to get user.clj loaded
-                        :source-paths ["src/cljs" "dev"]
-                        ;; for CIDER
-                        ;; :plugins [[cider/cider-nrepl "0.12.0"]]
-                        :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
-                        ;; need to add the compliled assets to the :clean-targets
-                        :clean-targets ^{:protect false} ["resources/public/misc/js/compiled"
-                                                         :target-path]}})
+             :im-dev {:dependencies [[binaryage/devtools "0.9.2"]
+                                     [figwheel-sidecar "0.5.10"]
+                                     [com.cemerick/piggieback "0.2.1"]]
+                      ;; need to add dev source path here to get user.clj loaded
+                      :source-paths ["src/cljs" "dev"]
+                      ;; for CIDER
+                      ;; :plugins [[cider/cider-nrepl "0.12.0"]]
+                      :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
+                      ;; need to add the compliled assets to the :clean-targets
+                      :clean-targets ^{:protect false} ["resources/public/im/js/compiled"
+                                                        :target-path]}})

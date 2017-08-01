@@ -1,4 +1,4 @@
-(ns im.handler
+(ns im.bfa-handler
   (:require [compojure.core :refer [GET routes defroutes]]
             [compojure.route :refer [resources]]
             [ring.middleware.reload :refer [wrap-reload]]
@@ -15,7 +15,7 @@
    [:body
     [:div#app
      [:h2#change-me "Changing..."]]
-    (include-js "/im/js/compiled/im.js")
+    (include-js "/bfa/js/compiled/bfa.js")
     ]))
 
 (defroutes app-routes
