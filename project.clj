@@ -27,30 +27,30 @@
 
   :cljsbuild {:builds {
 
-              :im-dev {
-                :source-paths ["src/cljs"]
-                :figwheel {:on-jsload "im.core/on-js-reload"
-                           :open-urls ["http://localhost:3449/"]}
+                       :im-dev {
+                                :source-paths ["src/cljs"]
+                                :figwheel {:on-jsload "im.core/on-js-reload"
+                                           :open-urls ["http://localhost:3449/"]}
 
-                :compiler {:main im.core
-                           :asset-path "js/compiled/out"
-                           :output-to "resources/im/public/js/compiled/im.js"
-                           :output-dir "resources/im/public/js/compiled/out"
-                           :source-map-timestamp true
-                           :preloads [devtools.preload]}}
+                                :compiler {:main im.core
+                                           :asset-path "js/compiled/out"
+                                           :output-to "resources/im/public/js/compiled/im.js"
+                                           :output-dir "resources/im/public/js/compiled/out"
+                                           :source-map-timestamp true
+                                           :preloads [devtools.preload]}}
 
-              :im-min {
-                :source-paths ["src/cljs"]
-                :compiler {:main im.core
-                           :output-to "resources/im/public/js/compiled/im.min.js"
-                           :output-dir "resources/im/public/js/compiled-min/out"
-                           :optimizations :advanced
-                           :pretty-print false}}
+                       :im-min {
+                                :source-paths ["src/cljs"]
+                                :compiler {:main im.core
+                                           :output-to "resources/im/public/js/compiled/im.min.js"
+                                           :output-dir "resources/im/public/js/compiled-min/out"
+                                           :optimizations :advanced
+                                           :pretty-print false}}
 
                        :bfa-dev {
                                  :source-paths ["src/cljs"]
                                  :figwheel {:on-jsload "bfa.core/on-js-reload"
-                                            :open-urls ["http://localhost:3449/"]}
+                                            :open-urls ["http://localhost:3450/"]}
 
                                  :compiler {:main bfa.core
                                             :asset-path "js/compiled/out"
@@ -71,12 +71,14 @@
   :profiles {
              :default [:base :system :user :provided :dev :fig-im]
              :fig-im {:figwheel {:http-server-root "im/public"
+                                 :server-port 3449
                                  :css-dirs ["resources/im/public/css"]
                                  :ring-handler im.handler/app
                                  :server-logfile "figwheel-logfile-im.log"}
                       :clean-targets ^{:protect false} ["resources/im/public/js/compiled"
                                                         :target-path]}
              :fig-bfa {:figwheel {:http-server-root "bfa/public"
+                                  :server-port 3450
                                   :css-dirs ["resources/bfa/public/css"]
                                   :ring-handler bfa.handler/app
                                   :server-logfile "figwheel-logfile-bfa.log"}
