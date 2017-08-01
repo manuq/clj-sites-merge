@@ -45,16 +45,17 @@
                            ;; https://github.com/binaryage/cljs-devtools
                            :preloads [devtools.preload]}}
 
-              ;;  ;; This next build is an compressed minified build for
-              ;;  ;; production. You can build this with:
-              ;;  ;; lein cljsbuild once min
-              ;; :bfa-min {
-              ;;   ;; :resource-paths ["resources/bfa"]
-              ;;   :source-paths ["src/cljs"]
-              ;;   :compiler {:main bfa.core
-              ;;              :output-to "resources/public/bfa/js/compiled/bfa.min.js"
-              ;;              :optimizations :advanced
-              ;;              :pretty-print false}}
+               ;; This next build is an compressed minified build for
+               ;; production. You can build this with:
+               ;; lein cljsbuild once min
+              :bfa-min {
+                ;; :resource-paths ["resources/bfa"]
+                :source-paths ["src/cljs"]
+                :compiler {:main bfa.core
+                           :output-to "resources/public/bfa/js/compiled/bfa.min.js"
+                           :output-dir "resources/public/bfa/js/compiled-min/out"
+                           :optimizations :advanced
+                           :pretty-print false}}
 
 
               :im-dev {
@@ -76,16 +77,17 @@
                            ;; https://github.com/binaryage/cljs-devtools
                            :preloads [devtools.preload]}}
 
-              ;;  ;; This next build is an compressed minified build for
-              ;;  ;; production. You can build this with:
-              ;;  ;; lein cljsbuild once min
-              ;; :im-min {
-              ;;   ;; :resource-paths ["resources/misc"]
-              ;;   :source-paths ["src/cljs"]
-              ;;   :compiler {:main im.core
-              ;;              :output-to "resources/public/im/js/compiled/im.min.js"
-              ;;              :optimizations :advanced
-              ;;              :pretty-print false}}
+               ;; This next build is an compressed minified build for
+               ;; production. You can build this with:
+               ;; lein cljsbuild once min
+              :im-min {
+                ;; :resource-paths ["resources/misc"]
+                :source-paths ["src/cljs"]
+                :compiler {:main im.core
+                           :output-to "resources/public/im/js/compiled/im.min.js"
+                           :output-dir "resources/public/im/js/compiled-min/out"
+                           :optimizations :advanced
+                           :pretty-print false}}
 
 }}
 
@@ -104,14 +106,14 @@
              ;; doesn't work for you just run your own server :) (see lein-ring)
 
              ;; For BFA
-             :css-dirs ["resources/public/bfa/css"]
-             :ring-handler im.bfa-handler/app
-             :server-logfile "figwheel-logfile-bfa.log"
+             ;; :css-dirs ["resources/public/bfa/css"]
+             ;; :ring-handler im.bfa-handler/app
+             ;; :server-logfile "figwheel-logfile-bfa.log"
 
              ;; For MISC
-            ;; :css-dirs ["resources/public/im/css"]
-            ;; :ring-handler im.handler/app
-            ;; :server-logfile "figwheel-logfile-im.log"
+            :css-dirs ["resources/public/im/css"]
+            :ring-handler im.handler/app
+            :server-logfile "figwheel-logfile-im.log"
 
              ;;:load-all-builds false 
 
