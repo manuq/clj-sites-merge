@@ -14,8 +14,7 @@
                  [ring "1.5.1"]
                  [ring/ring-defaults "0.2.1"]
                  [compojure "1.6.0"]
-                 [hiccup "1.0.5"]
-                 [lein-garden "0.3.0"]]
+                 [hiccup "1.0.5"]]
 
   :plugins [[lein-cljsbuild "1.1.5" :exclusions [[org.clojure/clojure]]]]
 
@@ -86,7 +85,8 @@
                                                          :target-path]}
              :dev {:dependencies [[binaryage/devtools "0.9.2"]
                                   [figwheel-sidecar "0.5.10"]
-                                  [com.cemerick/piggieback "0.2.1"]]
+                                  [com.cemerick/piggieback "0.2.1"]
+                                  [lein-garden "0.3.0"]]
                    :source-paths ["src/cljs" "dev"]
                    ;; for CIDER
                    ;; :plugins [[cider/cider-nrepl "0.12.0"]]
@@ -94,11 +94,13 @@
                              [lein-garden "0.3.0"]]
                    :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
 
-                   :garden {:builds [{:source-paths ["src/styles"]
+                   :garden {:builds [{:id "im"
+                                      :source-paths ["src/styles"]
                                       :stylesheet im.style/screen
                                       :compiler {:output-to "resources/im/public/css/screen.css"
                                                  :pretty-print? false}}
-                                     {:source-paths ["src/styles"]
+                                     {:id "bfa"
+                                      :source-paths ["src/styles"]
                                       :stylesheet bfa.style/screen
                                       :compiler {:output-to "resources/bfa/public/css/screen.css"
                                                  :pretty-print? false}}]}
