@@ -24,51 +24,38 @@
   :aliases {"fig-im" ["with-profile" "+fig-im" "figwheel" "im-dev"]
             "fig-bfa" ["with-profile" "+fig-bfa" "figwheel" "bfa-dev"]}
 
-  :cljsbuild {:builds {
-
-                       :im-dev {
-                                :source-paths ["src/cljs"]
+  :cljsbuild {:builds {:im-dev {:source-paths ["src/cljs"]
                                 :figwheel {:on-jsload "im.core/on-js-reload"
                                            :open-urls ["http://localhost:3449/"]}
-
                                 :compiler {:main im.core
                                            :asset-path "js/compiled/out"
                                            :output-to "resources/im/public/js/compiled/im.js"
                                            :output-dir "resources/im/public/js/compiled/out"
                                            :source-map-timestamp true
                                            :preloads [devtools.preload]}}
-
-                       :im-min {
-                                :source-paths ["src/cljs"]
+                       :im-min {:source-paths ["src/cljs"]
                                 :compiler {:main im.core
                                            :output-to "resources/im/public/js/compiled/im.min.js"
                                            :output-dir "resources/im/public/js/compiled-min/out"
                                            :optimizations :advanced
                                            :pretty-print false}}
-
-                       :bfa-dev {
-                                 :source-paths ["src/cljs"]
+                       :bfa-dev {:source-paths ["src/cljs"]
                                  :figwheel {:on-jsload "bfa.core/on-js-reload"
                                             :open-urls ["http://localhost:3450/"]}
-
                                  :compiler {:main bfa.core
                                             :asset-path "js/compiled/out"
                                             :output-to "resources/bfa/public/js/compiled/bfa.js"
                                             :output-dir "resources/bfa/public/js/compiled/out"
                                             :source-map-timestamp true
                                             :preloads [devtools.preload]}}
-
-                       :bfa-min {
-                                 :source-paths ["src/cljs"]
+                       :bfa-min {:source-paths ["src/cljs"]
                                  :compiler {:main bfa.core
                                             :output-to "resources/bfa/public/js/compiled/bfa.min.js"
                                             :output-dir "resources/bfa/public/js/compiled-min/out"
                                             :optimizations :advanced
-                                            :pretty-print false}}
-}}
+                                            :pretty-print false}}}}
 
-  :profiles {
-             :default [:base :system :user :provided :dev :fig-im]
+  :profiles {:default [:base :system :user :provided :dev :fig-im]
              :fig-im {:figwheel {:http-server-root "im/public"
                                  :server-port 3449
                                  :css-dirs ["resources/im/public/css"]
@@ -93,7 +80,6 @@
                    :plugins [[lein-figwheel "0.5.10"]
                              [lein-garden "0.3.0"]]
                    :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
-
                    :garden {:builds [{:id "im"
                                       :source-paths ["src/styles"]
                                       :stylesheet im.style/screen
@@ -103,9 +89,4 @@
                                       :source-paths ["src/styles"]
                                       :stylesheet bfa.style/screen
                                       :compiler {:output-to "resources/bfa/public/css/screen.css"
-                                                 :pretty-print? false}}]}
-
-                   }
-
-
-             })
+                                                 :pretty-print? false}}]}}})
