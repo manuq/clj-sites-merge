@@ -6,17 +6,18 @@
     # Build the CSS
     lein garden once
 
-    # Run site A on port 3000
+    # Run server on port 3000
+    # add hostnames to /etc/hosts to get the different sites
+    # in: http://misc.local:3000/
+    # and: http://bfa.local:3000/
     lein run
 
-    # Run site B on port 3001
-    lein run 3001
-
-    # Run site A (default) with figwheel
-    lein figwheel
-
-    # Run site B with figwheel
-    lein with-profile +fig-bfa figwheel bfa-dev
+    # With the server running, you can start figwheel to do
+    # live-coding
+    lein figwheel im-dev bfa-dev
 
     # Or use the alias
-    lein fig-bfa
+    lein fig-all
+
+    # With figwheel running, you can automatically update the CSS
+    lein garden auto

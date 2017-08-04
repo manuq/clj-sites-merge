@@ -21,12 +21,10 @@
   :source-paths ["src/clj"]
 
   :main im.server
-  :aliases {"fig-im" ["with-profile" "+fig-im" "figwheel" "im-dev"]
-            "fig-bfa" ["with-profile" "+fig-bfa" "figwheel" "bfa-dev"]}
+  :aliases {"fig-all" ["figwheel" "im-dev" "bfa-dev"]}
 
   :cljsbuild {:builds {:im-dev {:source-paths ["src/cljs"]
-                                :figwheel {:on-jsload "im.core/on-js-reload"
-                                           :open-urls ["http://localhost:3449/"]}
+                                :figwheel {:on-jsload "im.core/on-js-reload"}
                                 :compiler {:main im.core
                                            :asset-path "js/compiled/out"
                                            :output-to "resources/im/public/js/compiled/im.js"
@@ -40,8 +38,7 @@
                                            :optimizations :advanced
                                            :pretty-print false}}
                        :bfa-dev {:source-paths ["src/cljs"]
-                                 :figwheel {:on-jsload "bfa.core/on-js-reload"
-                                            :open-urls ["http://localhost:3450/"]}
+                                 :figwheel {:on-jsload "bfa.core/on-js-reload"}
                                  :compiler {:main bfa.core
                                             :asset-path "js/compiled/out"
                                             :output-to "resources/bfa/public/js/compiled/bfa.js"
@@ -55,31 +52,27 @@
                                             :optimizations :advanced
                                             :pretty-print false}}}}
 
-  :profiles {:default [:base :system :user :provided :dev :fig-im]
-             :fig-im {:figwheel {:http-server-root "im/public"
-                                 :server-port 3449
-                                 :css-dirs ["resources/im/public/css"]
-                                 :ring-handler im.handler/app
-                                 :server-logfile "figwheel-logfile-im.log"}
-                      :clean-targets ^{:protect false} ["resources/im/public/js/compiled"
-                                                        :target-path]}
-             :fig-bfa {:figwheel {:http-server-root "bfa/public"
-                                  :server-port 3450
-                                  :css-dirs ["resources/bfa/public/css"]
-                                  :ring-handler bfa.handler/app
-                                  :server-logfile "figwheel-logfile-bfa.log"}
-                       :clean-targets ^{:protect false} ["resources/bfa/public/js/compiled"
-                                                         :target-path]}
+  :profiles {:default [:base :system :user :provided :dev]
              :dev {:dependencies [[binaryage/devtools "0.9.2"]
                                   [figwheel-sidecar "0.5.10"]
                                   [com.cemerick/piggieback "0.2.1"]
                                   [lein-garden "0.3.0"]]
+
+                   :figwheel {:css-dirs ["resources/im/public/css"
+                                         "resources/bfa/public/css"]}
+
+                   :clean-targets ^{:protect false} ["resources/im/public/js/compiled"
+                                                     "resources/bfa/public/js/compiled"
+                                                     :target-path]
+
                    :source-paths ["src/cljs" "dev"]
-                   ;; for CIDER
-                   ;; :plugins [[cider/cider-nrepl "0.12.0"]]
+
                    :plugins [[lein-figwheel "0.5.10"]
-                             [lein-garden "0.3.0"]]
+                             [lein-garden "0.3.0"]
+                             [cider/cider-nrepl "0.12.0"]]
+
                    :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
+
                    :garden {:builds [{:id "im"
                                       :source-paths ["src/styles"]
                                       :stylesheet im.style/screen
