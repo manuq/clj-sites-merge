@@ -1,4 +1,4 @@
-# two sites one repo
+# two sites one server
 
     # Build the js
     lein cljsbuild once
